@@ -5,10 +5,10 @@ const Login = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
 
-  console.log(Email, Password);
-
+  // Firebase Auth
   const auth = fire.auth();
 
+  // Handlers
   const changeHandler = (e) => {
     switch (e.target.id) {
       case "email":
