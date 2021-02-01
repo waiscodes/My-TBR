@@ -1,11 +1,11 @@
 import React from "react";
 import fire from "../fire";
-import Login from "../components/Login";
+import Register from "../components/Register";
 
 const SignIn = () => {
   return (
     <>
-      <Login />
+      <Register />
     </>
   );
 };

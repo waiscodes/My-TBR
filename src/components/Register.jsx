@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 
 const Register = () => {
@@ -7,6 +7,8 @@ const Register = () => {
   const passwordConfirmRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const handleSubmit = () => {};
 
   return (
     <>
@@ -28,7 +30,7 @@ const Register = () => {
               <Form.Control type='password' ref={passwordConfirmRef} required />
             </Form.Group>
             <Button disabled={loading} className='w-100' type='submit'>
-              Sign Up
+              Register
             </Button>
           </Form>
         </Card.Body>
