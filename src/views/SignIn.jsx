@@ -1,5 +1,6 @@
 import React from "react";
 import fire from "../fire";
+import Login from "../components/Login";
 
 const SignIn = () => {
   const auth = fire.auth();
@@ -7,7 +8,7 @@ const SignIn = () => {
 
   return (
     <>
-      <p>Sign In</p>
+      <Login />
     </>
   );
 };
