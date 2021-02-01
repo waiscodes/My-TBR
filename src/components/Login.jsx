@@ -1,6 +1,10 @@
 import React from "react";
+import fire from "../fire";
 
 const Login = () => {
+  const auth = fire.auth();
+  console.log(auth);
+
   return (
     <>
       <p>Login</p>
