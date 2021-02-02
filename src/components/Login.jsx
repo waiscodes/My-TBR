@@ -7,7 +7,7 @@ const Login = () => {
   const passwordRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { register } = useAuth();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,9 +15,9 @@ const Login = () => {
     try {
       setError("");
       setLoading(true);
-      await register(emailRef.current.value, passwordRef.current.value);
+      await login(emailRef.current.value, passwordRef.current.value);
     } catch {
-      setError("Failed to create an account");
+      setError("Failed to Login");
     }
     setLoading(false);
   };
