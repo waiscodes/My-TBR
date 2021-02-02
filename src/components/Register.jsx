@@ -10,10 +10,19 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const { register } = useAuth();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    register(emailRef.current.value, passwordRef.current.value);
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setError("Passwords Do Not Match");
+    }
+
+    try {
+      setError("");
+      await register(emailRef.current.value, passwordRef.current.value);
+    } catch {
+      setError("Failed to create an account");
+    }
   };
 
   return (
