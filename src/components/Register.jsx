@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { useAth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
   const emailRef = useRef();
@@ -8,8 +8,13 @@ const Register = () => {
   const passwordConfirmRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { register } = useAuth();
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    register(emailRef.current.value, passwordRef.current.value);
+  };
 
   return (
     <>
