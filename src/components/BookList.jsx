@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Card } from "react-bootstrap";
 import fire from "../fire";
 
 const BookList = () => {
@@ -12,7 +13,6 @@ const BookList = () => {
   const db = fire.firestore();
 
   let booksRef;
-
   booksRef = db.collection("books");
 
   const getBooks = () => {
@@ -28,18 +28,17 @@ const BookList = () => {
 
   return (
     <>
-      <div>
+      <Card>
         {books.map((doc) => {
           return (
-            <li key={doc.id} id='tbr'>
-              {doc.book.title}
-              <span>{doc.book.title}</span>
+            <Card key={doc.id} id='tbr'>
+              <h3>{doc.book.title}</h3>
               <span>{doc.book.author}</span>
-              <span>{doc.book.desc}</span>
-            </li>
+              <p>{doc.book.desc}</p>
+            </Card>
           );
         })}
-      </div>
+      </Card>
     </>
   );
 };
