@@ -4,6 +4,7 @@ import { Container } from "react-bootstrap";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Profile from "./views/Profile.jsx";
+import PrivateRoute from "./views/PrivateRoute";
 
 function App() {
   return (
@@ -16,8 +17,8 @@ function App() {
           <Router>
             <AuthProvider>
               <Switch>
-                <Route exact path='/Login' component={SignIn} />
-                <Route path='/' component={Profile} />
+                <Route path='/Login' component={SignIn} />
+                <PrivateRoute exact path='/' component={Profile} />
               </Switch>
             </AuthProvider>
           </Router>
