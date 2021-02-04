@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 const Register = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const nameRef = useRef();
+  const usernameRef = useRef();
   const passwordConfirmRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,7 +24,11 @@ const Register = () => {
     try {
       setError("");
       setLoading(true);
-      await register(emailRef.current.value, passwordRef.current.value);
+      await register(
+        emailRef.current.value,
+        usernameRef.current.value,
+        passwordRef.current.value
+      );
       history.push("/");
     } catch {
       setError("Failed to create an account");
@@ -37,12 +43,30 @@ const Register = () => {
           <h2 className='text-center mb-4'>Register</h2>
           {error && <Alert variant='danger'>{error}</Alert>}
           <Form onSubmit={handleSubmit}>
+            <Form.Group id='username'>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type='text'
+                autoComplete='username'
+                ref={usernameRef}
+                required
+              />
+            </Form.Group>
             <Form.Group id='email'>
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type='email'
                 autoComplete='username'
                 ref={emailRef}
+                required
+              />
+            </Form.Group>
+            <Form.Group id='username'>
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type='text'
+                autoComplete='username'
+                ref={usernameRef}
                 required
               />
             </Form.Group>
