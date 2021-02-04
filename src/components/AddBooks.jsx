@@ -35,6 +35,10 @@ const AddBooks = () => {
               <Form.Label>Author</Form.Label>
               <Form.Control type='text' ref={authorRef} required />
             </Form.Group>
+            <Form.Group controlId='exampleForm.ControlTextarea1'>
+              <Form.Label>Review</Form.Label>
+              <Form.Control as='textarea' rows={3} />
+            </Form.Group>
             <Button disabled={loading} className='w-100' type='submit'>
               Recommend
             </Button>
