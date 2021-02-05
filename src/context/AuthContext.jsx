@@ -10,9 +10,10 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  const register = (email, username, password) => {
+  const register = (name, email, username, password) => {
     auth.createUserWithEmailAndPassword(email, password).then((cred) => {
       return db.collection("users").doc(cred.user.uid).set({
+        name: name,
         username: username,
         bio: "",
       });

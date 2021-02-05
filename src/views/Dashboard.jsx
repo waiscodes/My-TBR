@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Profile from "../components/Profile";
+import YourProfile from "../components/YourProfile";
 import BookList from "../components/BookList";
 import AddBooks from "../components/AddBooks";
 
 const Dashboard = () => {
   return (
     <>
-      <Profile />
+      <YourProfile />
       <AddBooks />
       <BookList />
       <div className='w-100 text-center mt-2'></div>
