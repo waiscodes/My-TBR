@@ -26,7 +26,6 @@ const YourProfile = () => {
       .get()
       .then((snapshot) => {
         setUser(snapshot.data());
-        console.log(user);
       });
   };
 
@@ -45,7 +44,9 @@ const YourProfile = () => {
     <>
       <Card>
         <Card.Body>
-          <h2 className='text-center mb-4'>{currentUser.email}</h2>
+          <h2 className='text-center'>{user.fullName}</h2>
+          <p className='text-center'>@{user.username}</p>
+          <p className='text-center'>{user.bio}</p>
           {error && <Alert variant='danger'>{error}</Alert>}
         </Card.Body>
       </Card>
