@@ -22,15 +22,11 @@ const YourProfile = () => {
 
   const getUser = () => {
     booksRef
-      .where("username", "==", "bb")
+      .doc(currentUser.uid)
       .get()
       .then((snapshot) => {
-        setUser(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            user: doc.data(),
-          }))
-        );
+        setUser(snapshot.data());
+        console.log(user);
       });
   };
 
