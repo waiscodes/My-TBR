@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
 import fire from "../fire";
 
-const BookList = () => {
+const BookList = (props) => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -16,14 +16,17 @@ const BookList = () => {
   booksRef = db.collection("books");
 
   const getBooks = () => {
-    booksRef.onSnapshot((querySnapshot) => {
-      setBooks(
-        querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          book: doc.data(),
-        }))
-      );
-    });
+    booksRef
+      .where("username", "==", "bb")
+      .get()
+      .then((snapshot) => {
+        setBooks(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            book: doc.data(),
+          }))
+        );
+      });
   };
 
   return (

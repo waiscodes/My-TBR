@@ -50,9 +50,9 @@ const YourProfile = () => {
       </div>
       <Card className='mb-3'>
         <Card.Body>
-          <h2 className='text-center'>{user.fullName}</h2>
-          <p className='text-center'>@{user.username}</p>
-          <p className='text-center'>{user.bio}</p>
+          <h2 className='text-center'>{user && user.fullName}</h2>
+          <p className='text-center'>@{user && user.username}</p>
+          <p className='text-center'>{user && user.bio}</p>
         </Card.Body>
       </Card>
     </>
