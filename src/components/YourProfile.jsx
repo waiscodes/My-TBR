@@ -42,19 +42,19 @@ const YourProfile = () => {
 
   return (
     <>
-      <Card>
-        <Card.Body>
-          <h2 className='text-center'>{user.fullName}</h2>
-          <p className='text-center'>@{user.username}</p>
-          <p className='text-center'>{user.bio}</p>
-          {error && <Alert variant='danger'>{error}</Alert>}
-        </Card.Body>
-      </Card>
       <div className='w-100 text-center mt-2'>
+        {error && <Alert variant='danger'>{error}</Alert>}
         <Button variant='link' onClick={handleLogout}>
           Log Out
         </Button>
       </div>
+      <Card className='mb-3'>
+        <Card.Body>
+          <h2 className='text-center'>{user.fullName}</h2>
+          <p className='text-center'>@{user.username}</p>
+          <p className='text-center'>{user.bio}</p>
+        </Card.Body>
+      </Card>
     </>
   );
 };
