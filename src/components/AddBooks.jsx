@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
+import { db } from "../fire";
 
 const AddBooks = () => {
   const titleRef = useRef();
@@ -11,8 +12,18 @@ const AddBooks = () => {
   const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
 
+  const addToFirestore = () => {
+    db.collection("books").add({
+      title: titleRef.current.value,
+      author: authorRef.current.title,
+      description: descriptionRef.current.value,
+      username: "bb",
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    addToFirestore();
   };
 
   return (
@@ -25,7 +36,7 @@ const AddBooks = () => {
             <Form.Group id='email'>
               <Form.Label>Title</Form.Label>
               <Form.Control
-                type='email'
+                type='text'
                 autoComplete='username'
                 ref={titleRef}
                 required
@@ -37,7 +48,7 @@ const AddBooks = () => {
             </Form.Group>
             <Form.Group controlId='exampleForm.ControlTextarea1'>
               <Form.Label>Review</Form.Label>
-              <Form.Control as='textarea' rows={3} />
+              <Form.Control as='textarea' rows={3} ref={descriptionRef} />
             </Form.Group>
             <Button disabled={loading} className='w-100' type='submit'>
               Recommend
