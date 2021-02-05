@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
-import fire from "../fire";
+import { db } from "../fire";
 
 const BookList = (props) => {
   const [books, setBooks] = useState([]);
@@ -10,13 +10,8 @@ const BookList = (props) => {
   }, []);
 
   // Firebase
-  const db = fire.firestore();
-
-  let booksRef;
-  booksRef = db.collection("books");
-
   const getBooks = () => {
-    booksRef
+    db.collection("books")
       .where("username", "==", "bb")
       .get()
       .then((snapshot) => {
