@@ -11,6 +11,11 @@ const Profile = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [books, setBooks] = useState([]);
+  const [bookRec, setBookRec] = useState(false);
+
+  const toggleBook = () => {
+    setBookRec(!bookRec);
+  };
 
   // Get books list
   useEffect(() => {
@@ -50,7 +55,10 @@ const Profile = () => {
   return (
     <>
       <h1>{username}</h1>
-      <Card>
+      <div className='w-100 text-center mt-2'>
+        <button onClick={toggleBook}>Recommend Book</button>
+      </div>
+      <Card className={bookRec ? "" : "d-none"}>
         <Card.Body>
           {error && <Alert variant='danger'>{error}</Alert>}
           <Form onSubmit={handleSubmit}>
