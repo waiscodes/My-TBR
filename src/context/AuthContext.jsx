@@ -9,6 +9,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [userInfo, setUserInfo] = useState();
+  const [userExists, setUserExists] = useState("default");
   const [loading, setLoading] = useState(true);
 
   const register = (name, email, username, password) => {
@@ -27,6 +28,22 @@ export function AuthProvider({ children }) {
 
   const logout = () => {
     return auth.signOut();
+  };
+
+  const findUser = (username) => {
+    db.collection("users")
+      .where("username", "==", username)
+      .get()
+      .then((snap) => {
+        snap.docs.map((doc) => {
+          if (doc.data()) {
+            setUserExists("yep");
+          } else {
+            setUserExists("nope");
+          }
+        });
+      })
+      .catch((err) => alert(err));
   };
 
   // Reset password here
@@ -55,12 +72,14 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
+    userExists,
     userInfo,
     register,
     login,
     logout,
     updateEmail,
     updatePassword,
+    findUser,
   };
 
   return (

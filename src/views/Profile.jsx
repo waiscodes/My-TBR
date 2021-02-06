@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { db } from "../fire";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Profile = () => {
   const { username } = useParams();
@@ -12,17 +13,36 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [books, setBooks] = useState([]);
   const [bookRec, setBookRec] = useState(false);
+  const [userExists, setUserExists] = useState();
+
+  useEffect(() => {
+    findUser();
+    getBooks();
+  }, []);
+
+  const findUser = () => {
+    db.collection("users")
+      .where("username", "==", username)
+      .get()
+      .then((snap) => {
+        snap.docs.map((doc) => {
+          setUserExists(doc.data());
+          const myDoc = doc.data();
+          if (myDoc.username !== undefined) {
+            console.log(myDoc.username);
+          } else {
+            console.log(myDoc.username);
+          }
+        });
+      })
+      .catch((err) => alert(err));
+  };
 
   const toggleBook = () => {
     setBookRec(!bookRec);
   };
 
-  // Get books list
-  useEffect(() => {
-    getBooks();
-  }, []);
-
-  //
+  // Get books List
   const getBooks = () => {
     db.collection("books")
       .where("username", "==", username)
@@ -54,7 +74,8 @@ const Profile = () => {
 
   return (
     <>
-      <h1>{username}</h1>
+      <h1>{userExists && userExists.username}</h1>
+      <button onClick={findUser}>Find User</button>
       <div className='w-100 text-center mt-2'>
         <button onClick={toggleBook}>Recommend Book</button>
       </div>
