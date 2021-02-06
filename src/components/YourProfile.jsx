@@ -2,32 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Card, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-import fire from "../fire";
 
 const YourProfile = () => {
-  const [user, setUser] = useState();
   const [error, setError] = useState("");
-  const { currentUser, logout } = useAuth();
+  const { currentUser, logout, userInfo } = useAuth();
   const history = useHistory();
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  // Firebase
-  const db = fire.firestore();
-
-  let booksRef;
-  booksRef = db.collection("users");
-
-  const getUser = () => {
-    booksRef
-      .doc(currentUser.uid)
-      .get()
-      .then((snapshot) => {
-        setUser(snapshot.data());
-      });
-  };
 
   const handleLogout = async () => {
     setError("");
@@ -50,9 +29,9 @@ const YourProfile = () => {
       </div>
       <Card className='mb-3'>
         <Card.Body>
-          <h2 className='text-center'>{user && user.fullName}</h2>
-          <p className='text-center'>@{user && user.username}</p>
-          <p className='text-center'>{user && user.bio}</p>
+          <h2 className='text-center'>{userInfo && userInfo.fullName}</h2>
+          <p className='text-center'>@{userInfo && userInfo.username}</p>
+          <p className='text-center'>{userInfo && userInfo.bio}</p>
         </Card.Body>
       </Card>
     </>
