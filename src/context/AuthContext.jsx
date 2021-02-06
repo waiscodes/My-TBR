@@ -38,16 +38,6 @@ export function AuthProvider({ children }) {
     return currentUser.updatePassword(password);
   };
 
-  // // Find Username
-  // const findUsername = (uid) => {
-  //   db.collection("users")
-  //     .doc(uid)
-  //     .get()
-  //     .then((snapshot) => {
-  //       return snapshot.data();
-  //     });
-  // };
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -71,7 +61,6 @@ export function AuthProvider({ children }) {
     logout,
     updateEmail,
     updatePassword,
-    // findUsername,
   };
 
   return (

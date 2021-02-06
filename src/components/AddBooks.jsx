@@ -12,7 +12,6 @@ const AddBooks = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { currentUser, userInfo } = useAuth();
-  // const { findUsername } = useAuth();
 
   const addToFirestore = () => {
     db.collection("books").add({
@@ -27,22 +26,6 @@ const AddBooks = () => {
     e.preventDefault();
     addToFirestore();
   };
-
-  // const getUsername = async (uid) => {
-  //   const temp = await db
-  //     .collection("users")
-  //     .doc(uid)
-  //     .get()
-  //     .then((snap) => {
-  //       return snap.data();
-  //     });
-
-  //   setUsername(temp);
-  // };
-
-  // useEffect(() => {
-  //   getUsername(currentUser.uid);
-  // }, []);
 
   return (
     <>
