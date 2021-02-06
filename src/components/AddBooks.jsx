@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import { db } from "../fire";
 
 const AddBooks = () => {
-  const [username, setUsername] = useState();
   const titleRef = useRef();
   const authorRef = useRef();
   const descriptionRef = useRef();
@@ -18,7 +17,7 @@ const AddBooks = () => {
       title: titleRef.current.value,
       author: authorRef.current.value,
       description: descriptionRef.current.value,
-      username: "bb",
+      username: userInfo.username,
     });
   };
 
@@ -31,9 +30,6 @@ const AddBooks = () => {
     <>
       <Card>
         <Card.Body>
-          {username}
-          {userInfo && JSON.stringify(userInfo, null, 2)}
-          {currentUser && currentUser.email}
           {error && <Alert variant='danger'>{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id='email'>
