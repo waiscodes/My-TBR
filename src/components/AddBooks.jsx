@@ -15,7 +15,7 @@ const AddBooks = () => {
   const addToFirestore = () => {
     db.collection("books").add({
       title: titleRef.current.value,
-      author: authorRef.current.title,
+      author: authorRef.current.value,
       description: descriptionRef.current.value,
       username: "bb",
     });
@@ -35,12 +35,7 @@ const AddBooks = () => {
           <Form onSubmit={handleSubmit}>
             <Form.Group id='email'>
               <Form.Label>Title</Form.Label>
-              <Form.Control
-                type='text'
-                autoComplete='username'
-                ref={titleRef}
-                required
-              />
+              <Form.Control type='text' ref={titleRef} required />
             </Form.Group>
             <Form.Group id='email'>
               <Form.Label>Author</Form.Label>

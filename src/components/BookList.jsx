@@ -32,7 +32,7 @@ const BookList = (props) => {
             <Card key={doc.id} id='tbr'>
               <h3>{doc.book.title}</h3>
               <span>{doc.book.author}</span>
-              <p>{doc.book.desc}</p>
+              <p>{doc.book.description}</p>
             </Card>
           );
         })}
