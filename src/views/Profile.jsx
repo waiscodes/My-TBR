@@ -75,7 +75,7 @@ const Profile = () => {
   return (
     <>
       <h1>{userExists && userExists.username}</h1>
-      <button onClick={findUser}>Find User</button>
+      <p>{userExists && userExists.bio}</p>
       <div className='w-100 text-center mt-2'>
         <button onClick={toggleBook}>Recommend Book</button>
       </div>
