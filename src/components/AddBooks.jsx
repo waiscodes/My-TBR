@@ -1,16 +1,18 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import { db } from "../fire";
 
 const AddBooks = () => {
+  const [username, setUsername] = useState();
   const titleRef = useRef();
   const authorRef = useRef();
   const descriptionRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { currentUser } = useAuth();
+  const { currentUser, userInfo } = useAuth();
+  // const { findUsername } = useAuth();
 
   const addToFirestore = () => {
     db.collection("books").add({
@@ -26,10 +28,28 @@ const AddBooks = () => {
     addToFirestore();
   };
 
+  // const getUsername = async (uid) => {
+  //   const temp = await db
+  //     .collection("users")
+  //     .doc(uid)
+  //     .get()
+  //     .then((snap) => {
+  //       return snap.data();
+  //     });
+
+  //   setUsername(temp);
+  // };
+
+  // useEffect(() => {
+  //   getUsername(currentUser.uid);
+  // }, []);
+
   return (
     <>
       <Card>
         <Card.Body>
+          {username}
+          {userInfo && JSON.stringify(userInfo, null, 2)}
           {currentUser && currentUser.email}
           {error && <Alert variant='danger'>{error}</Alert>}
           <Form onSubmit={handleSubmit}>

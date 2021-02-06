@@ -8,6 +8,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
+  const [userInfo, setUserInfo] = useState();
   const [loading, setLoading] = useState(true);
 
   const register = (name, email, username, password) => {
@@ -37,9 +38,25 @@ export function AuthProvider({ children }) {
     return currentUser.updatePassword(password);
   };
 
+  // // Find Username
+  // const findUsername = (uid) => {
+  //   db.collection("users")
+  //     .doc(uid)
+  //     .get()
+  //     .then((snapshot) => {
+  //       return snapshot.data();
+  //     });
+  // };
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
+      db.collection("users")
+        .doc(user.uid)
+        .get()
+        .then((snap) => {
+          setUserInfo(snap.data());
+        });
       setLoading(false);
     });
 
@@ -48,11 +65,13 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
+    userInfo,
     register,
     login,
     logout,
     updateEmail,
     updatePassword,
+    // findUsername,
   };
 
   return (
