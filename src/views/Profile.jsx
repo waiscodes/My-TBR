@@ -1,6 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { useAuth } from "../context/AuthContext";
 import { db } from "../fire";
 import { useParams } from "react-router-dom";
 
@@ -11,7 +10,29 @@ const Profile = () => {
   const descriptionRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [books, setBooks] = useState([]);
 
+  // Get books list
+  useEffect(() => {
+    getBooks();
+  }, []);
+
+  //
+  const getBooks = () => {
+    db.collection("books")
+      .where("username", "==", username)
+      .get()
+      .then((snapshot) => {
+        setBooks(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            book: doc.data(),
+          }))
+        );
+      });
+  };
+
+  // Add Book
   const addToFirestore = () => {
     db.collection("books").add({
       title: titleRef.current.value,
@@ -50,6 +71,17 @@ const Profile = () => {
             </Button>
           </Form>
         </Card.Body>
+      </Card>
+      <Card>
+        {books.map((doc) => {
+          return (
+            <Card key={doc.id} id='tbr'>
+              <h3>{doc.book.title}</h3>
+              <span>{doc.book.author}</span>
+              <p>{doc.book.description}</p>
+            </Card>
+          );
+        })}
       </Card>
     </>
   );
