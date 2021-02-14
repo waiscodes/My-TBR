@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { db } from "../fire";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const Profile = () => {
@@ -13,7 +13,8 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
   const [books, setBooks] = useState([]);
   const [bookRec, setBookRec] = useState(false);
-  const [userExists, setUserExists] = useState();
+  const [userExists] = useState();
+  const history = useHistory();
 
   useEffect(() => {
     findUser();
@@ -25,15 +26,11 @@ const Profile = () => {
       .where("username", "==", username)
       .get()
       .then((snap) => {
-        snap.docs.map((doc) => {
-          setUserExists(doc.data());
-          const myDoc = doc.data();
-          if (myDoc.username !== undefined) {
-            console.log(myDoc.username);
-          } else {
-            console.log(myDoc.username);
-          }
-        });
+        if (snap.docs[0] && snap.docs[0].exists) {
+          console.log("gottem");
+        } else {
+          history.push("/login");
+        }
       })
       .catch((err) => alert(err));
   };
