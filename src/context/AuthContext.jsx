@@ -42,10 +42,9 @@ export function AuthProvider({ children }) {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
       db.collection("users")
-        .doc(user.uid)
         .get()
         .then((snap) => {
-          setUserInfo(snap.data());
+          // setUserInfo(snap.data());
         });
       setLoading(false);
     });

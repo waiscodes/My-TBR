@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
+import { auth } from "../fire";
 
 const Login = () => {
   const emailRef = useRef();
@@ -23,6 +24,10 @@ const Login = () => {
       setError("Failed to Login");
     }
     setLoading(false);
+  };
+
+  const twitter = () => {
+    auth.signInWithTwitter()
   };
 
   return (
@@ -50,10 +55,10 @@ const Login = () => {
                 required
               />
             </Form.Group>
-            <Button disabled={loading} className='w-100' type='submit'>
-              Login
-            </Button>
           </Form>
+          <Button className='w-100' onClick={twitter}>
+            Sign in with Twitter
+          </Button>
         </Card.Body>
       </Card>
     </>
