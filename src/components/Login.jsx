@@ -9,7 +9,7 @@ const Login = () => {
   const passwordRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, loginWithTwitter } = useAuth();
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -27,7 +27,7 @@ const Login = () => {
   };
 
   const twitter = () => {
-    auth.signInWithTwitter()
+    loginWithTwitter();
   };
 
   return (
@@ -35,7 +35,7 @@ const Login = () => {
       <Card>
         <Card.Body>
           <h2 className='text-center mb-4'>Login</h2>
-          {error && <Alert variant='danger'>{error}</Alert>}
+          {/* {error && <Alert variant='danger'>{error}</Alert>}
           <Form onSubmit={handleSubmit}>
             <Form.Group id='email'>
               <Form.Label>Email</Form.Label>
@@ -55,7 +55,7 @@ const Login = () => {
                 required
               />
             </Form.Group>
-          </Form>
+          </Form> */}
           <Button className='w-100' onClick={twitter}>
             Sign in with Twitter
           </Button>

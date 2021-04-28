@@ -25,6 +25,10 @@ export function AuthProvider({ children }) {
     return auth.signInWithEmailAndPassword(email, password);
   };
 
+  const loginWithTwitter = () => {
+    console.log("Signed in with twitter");
+  };
+
   const logout = () => {
     return auth.signOut();
   };
@@ -57,6 +61,7 @@ export function AuthProvider({ children }) {
     userInfo,
     register,
     login,
+    loginWithTwitter,
     logout,
     updateEmail,
     updatePassword,
