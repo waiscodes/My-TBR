@@ -25,9 +25,7 @@ export function AuthProvider({ children }) {
     return auth.signInWithEmailAndPassword(email, password);
   };
 
-  const loginWithTwitter = () => {
-    console.log("Signed in with twitter");
-  };
+  const loginWithTwitter = () => {};
 
   const logout = () => {
     return auth.signOut();
