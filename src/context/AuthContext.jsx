@@ -25,7 +25,17 @@ export function AuthProvider({ children }) {
     return auth.signInWithEmailAndPassword(email, password);
   };
 
-  const loginWithTwitter = () => {};
+  const loginWithTwitter = () => {
+    // console.log("Twitter Sign in Functionality");
+    // auth
+    //   .signInWithPopup(twitterOAuth)
+    //   .then((result) => {
+    //     console.log(result);
+    //   })
+    //   .catch(() => {
+    //     console.log("yikes something went wrong");
+    //   });
+  };
 
   const logout = () => {
     return auth.signOut();

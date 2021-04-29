@@ -2,11 +2,12 @@ import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import { useHistory } from "react-router-dom";
-import { auth } from "../fire";
+import fire, { auth, twitterProvider } from "../fire";
 
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const [result, setResult] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { login, loginWithTwitter } = useAuth();
@@ -27,13 +28,26 @@ const Login = () => {
   };
 
   const twitter = () => {
-    loginWithTwitter();
+    fire
+      .auth()
+      .signInWithPopup(twitterProvider)
+      .then((result) => {
+        setResult(result);
+      })
+      .catch((error) => {
+        console.log("yikes");
+      });
   };
 
   return (
     <>
       <Card>
         <Card.Body>
+          <img src={result?.user.photoURL} alt='' />
+          <p>{result?.user.displayName}</p>
+          <p>{result?.additionalUserInfo.username}</p>
+
+          <pre>{JSON.stringify(result.additionalUserInfo, null, 2)}</pre>
           <h2 className='text-center mb-4'>Login</h2>
           {/* {error && <Alert variant='danger'>{error}</Alert>}
           <Form onSubmit={handleSubmit}>
