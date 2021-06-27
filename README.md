@@ -63,6 +63,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/a
 
 ### Deployment
 
+
+<p><img align="left" src="https://github-readme-stats.vercel.app/api/top-langs?username=waiscodes&show_icons=true&locale=en&layout=compact" alt="waiscodes" /></p>
+
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
 ### `npm run build` fails to minify
